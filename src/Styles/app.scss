@@ -1,0 +1,45 @@
+.app{
+    // font-size: xx-large;
+    background-color: rgb(195, 194, 194);
+    margin: auto;
+    width: 70%;
+    min-width: 500px;
+    
+}
+.insert{
+    padding: 1%;
+    margin: 1%;
+    display: flex;
+    background-color:rgb(224, 224, 224);
+    text-align: center;
+    height: 1%;
+    justify-content: space-around;
+    .submit{
+        background-color: cornflowerblue;
+        padding: 1%;
+        border-radius: 3px;
+        font-weight: bold;
+    }
+    .submit:hover{
+        background-color: green;
+        font-weight: bold;
+        font-size:medium;
+        padding: 1%;
+        border-radius: 3px
+    }
+    .input{
+        width: 70%;
+        padding: 1%;
+        color: gray;
+        border-radius: 5px;
+        margin-right: 1px;
+    }
+    .div1{
+        margin: auto;
+        width: 18%;
+    }
+    .div2{
+        width: 82%;
+    }
+}
+

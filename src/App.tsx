@@ -1,24 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Insert from './Components/insert';
+import {useSelector} from 'react-redux';
+import { RootState } from './store';
+import { IDiscussion } from './models/model';
+import Discussion from './Components/discussion'
 
 function App() {
+  const discussions=useSelector((state:RootState)=>state.comment)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      dfsghjkhgfds
+      <Insert />
+      <div>
+        {discussions.map((item:IDiscussion)=><Discussion discussion={item} key={item.id} />)}
+      </div>
     </div>
   );
 }
