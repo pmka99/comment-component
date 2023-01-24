@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { AppDispatch } from '../store';
-import {useDispatch} from 'react-redux'
-import { addComment } from '../store/commentSlices';
-import { IDiscussion } from '../models/model';
-import myImage from '../images/download.png'
+import React ,{useState} from "react";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../store";
+import myImage from '../images/download.png';
 
-const Insert=()=>{
-    const[text,setText]=useState<string>('Start a discussion');
+
+
+const Reply=()=>{
+    const[text,setText]=useState<string>('Reply');
     const[style1,setStyle1]=useState<object>({visibility:"hidden"})
     const[style2,setStyle2]=useState<object>({color:'gray'})
 
@@ -23,6 +23,7 @@ const Insert=()=>{
             setText(value)
         }
     }
+
     const eventHandler=(e:React.FormEvent)=>{
         e.preventDefault();
         // dispatch(addComment({
@@ -37,23 +38,23 @@ const Insert=()=>{
         //     replies: []
         // }))
         console.log(Date.now())
-        setText('Start a discussion')
+        setText('Reply')
         setStyle2({color:'gray'})
         setStyle1({visibility:"hidden"})
     }
+
     const exitInput=(value:string)=>{
         if(text===""){
-            setText('Start a discussion')
+            setText('Reply')
             setStyle2({color:'gray'})
             setStyle1({visibility:"hidden"})
         }
     }
-    
     return(
-        <div className='insert'>
-            <div className='div1'>
+        <div className='reply'>
+            <div className="div1">
                 <div className='divImage'>     
-                    <img src={myImage} className='avatar' />    
+                    <img src={myImage} className='avatar' />  
                 </div>
             </div>
             <div className='div2'>
@@ -61,10 +62,10 @@ const Insert=()=>{
                     <input type="text" value={text} onChange={e=>changeInput(e.target.value)} onBlur={(e)=>exitInput(e.target.value)} onClick={()=>setText('')} className="input" style={style2}/>
                     <input type="submit" value="send" style={style1} className="submit" />
                 </form>
-
             </div>
         </div>
     )
+    
 }
 
-export default Insert;
+export default Reply;

@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { IDiscussion ,IComment} from '../models/model';
-import Replies from './replies';
-import Reply from './reply';
+import React ,{useState,useEffect} from "react";
+import { useDispatch } from "react-redux";
+import { IComment } from "../models/model";
+import { AppDispatch } from "../store";
 import likeImage from '../images/like.jpg'
 
 interface props{
-    discussion:IDiscussion
+    comment:IComment
     nowTime:number
 }
 
-const Discussion:React.FC<props>=({discussion,nowTime})=>{
-    const[style1,setStyle1]=useState<object>({display:"none"})
-    const[style2,setStyle2]=useState<object>({display:"block"})
+const Replies:React.FC<props>=({comment,nowTime})=>{
+
     const[time,setTime]=useState<string>('')
 
     useEffect(()=>{
@@ -19,7 +18,7 @@ const Discussion:React.FC<props>=({discussion,nowTime})=>{
     },[])
 
     const diftime=()=>{
-        var differrent:number=nowTime-discussion.date
+        var differrent:number=nowTime-comment.date
         differrent=Math.floor(differrent/1000);
 
         if(differrent<60){
@@ -57,61 +56,42 @@ const Discussion:React.FC<props>=({discussion,nowTime})=>{
         let avatarName=character1+character2
         return avatarName;
     }
-
-    const changeVisibility=()=>{
-        setStyle1({display:"block"})
-        setStyle2({display:"none"})
-    }
     const likeMore=()=>{
-        
+        console.log("like")
     }
 
-    
     return(
-        <div className='card'>
+        <div className='replyCard'>
             <div className='div1'>
                 <div className='divImage'>
                     {
-                        discussion.user.avatar
-                            ? <img src={discussion.user.avatar} className='avatar' />
-                            : <div className='avatarName'><div className='textAvatar'>{replaceAvatarName(discussion.user.name)}</div></div>
+                        comment.user.avatar
+                            ? <img src={comment.user.avatar} className='avatar' />
+                            : <div className='avatarName'><div className='textAvatar'>{replaceAvatarName(comment.user.name)}</div></div>
                     }
                 </div>
-                <div className='div-dropdown' style={style1}></div>
             </div>
             <div className='div2'>
-                <div className='div2-1'>
+                <div className="div2-1">
                     <div className='user'>
-                        {discussion.user.name}
+                        {comment.user.name}
                     </div>
+                    <div> </div>
                     <div className="time">
                         {time}
                     </div>
                 </div>
                 <div className='text'>
-                    {discussion.text}
+                    {comment.text}
                 </div>
                 <div className="div2-2" onClick={()=>likeMore()}>
-                    <div ><img className="likeImg" src={likeImage}></img></div>
-                    <div className='likenumber'>{discussion.likes}</div>
-                </div>
-                <div>
-                    {
-                        discussion.replies.length!==0
-                            ?   <div>
-                                    <div style={style2} onClick={e=>changeVisibility()}><button onClick={e=>changeVisibility()} className="button1">show more</button></div> 
-                                    <div style={style1}>{discussion.replies.map(item=><Replies nowTime={nowTime} comment={item}/>)}</div>
-                                </div>
-                            : <></>
-                    }
-                </div>
-
-                <div>
-                    <Reply />
+                    <div><img className="likeImg" src={likeImage}></img></div>
+                    <div className="likenumber">{comment.likes}</div>
                 </div>
             </div>
         </div>
+        
     )
 }
 
-export default Discussion;
+export default Replies;
