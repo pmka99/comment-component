@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+
 import Insert from './Components/insert';
 import {useSelector} from 'react-redux';
 import { RootState } from './store';
@@ -7,9 +7,6 @@ import Discussion from './Components/discussion'
 
 function App() {
   const discussions=useSelector((state:RootState)=>state.comment)
-  useEffect(()=>{
-    const nowTime=Date.now();
-  },[])
   const nowTime=Date.now();
   return (
     <div className="app">

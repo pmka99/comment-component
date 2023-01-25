@@ -1,12 +1,11 @@
 
-
 interface IUser {
     name: string;
     avatar?: string;
 }
 interface IComment {
     id: number;
-    date: number; // unix timestamp in milliseconds.
+    date: number; 
     user: IUser;
     text: string;
     likes: number;
@@ -18,4 +17,11 @@ interface IDiscussion extends IComment {
 interface IProps {
     comments: IComment[];
 }
-export type {IComment,IDiscussion,IProps,IUser}
+
+type AddLike=(id:number,obj:IComment)=>IComment
+
+type CalculateDiffTime=(nowtime:number,time:number)=>string
+type ReplaceAvatarName=(name:string)=>string
+
+
+export type {IComment,IDiscussion,IProps,IUser,CalculateDiffTime,ReplaceAvatarName,AddLike}

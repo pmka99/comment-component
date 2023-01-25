@@ -1,18 +1,18 @@
 .app{
-    // font-size: xx-large;
     background-color: rgb(215, 215, 215);
     margin: auto;
+    height: 100%;
     padding: 0.1%;
     width: 50%;
-    min-width: 500px;
+    min-width: 290px;
     .avatar{
-        width: 50px;
+        width: 5vw;
         border-radius: 50%;
     }
     .avatarName{
         display: flex;
-        width: 50px;
-        height: 50px;
+        width:5vw ;
+        height:5vw;
         text-align: center;
         margin: auto;
         border-radius: 50%;
@@ -38,7 +38,7 @@
     }
     .text{
         padding: 0.5%;
-        font-size: medium;
+        font-size: small;
         color: rgb(51, 48, 48);
         font-family:cursive;
     }
@@ -49,8 +49,6 @@
         font-weight: normal;
         color:rgb(177, 128, 128);
     }
-    // font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
-    // font-family:cursive;
     font-family: monospace;
 }
 .insert{
@@ -58,7 +56,6 @@
     margin: 0.5%;
     display: flex;
     background-color:rgb(238, 242, 244);
-    // text-align: center;
     height: 1%;
     justify-content: space-around;
     .submit{
@@ -66,6 +63,7 @@
         padding: 1%;
         border-radius: 3px;
         font-weight: bold;
+        border-width: 1.5px;
     }
     .submit:hover{
         background-color: green;
@@ -75,7 +73,7 @@
         border-radius: 3px
     }
     .input{
-        border-width: 0.1px;
+        border-width: 1.5px;
         width: 70%;
         padding: 1%;
         color: gray;
@@ -88,9 +86,8 @@
         width: 18%;
         display: flex;
         .divImage{
-            // margin: auto;
             margin-top: 4%;
-            margin-left: 50%;
+            margin-left: 3vw;
         }
     }
     .div2{
@@ -108,18 +105,17 @@
         height: auto;
         display: flex;
         flex-direction: column;
-        // margin: auto;
         width: 18%;
         display: flex;
         .divImage{
             margin-top: 4%;
-            margin-left: 50%;
-            // margin: auto;
+            margin-left: 3vw;
+            margin-right: auto;
         }
         .div-dropdown{
-            height: 70%;
-            margin-top: 4%;
-            margin-left: 70%;
+            height: 85%;
+            margin-top: 10%;
+            margin-left: 5vw;
             width: 3px;
             background-color: lightslategrey;
         }
@@ -129,6 +125,7 @@
         width: 82%;
         .div2-1{
             display: flex;
+            
         }
         .div2-2{
             display: flex;
@@ -181,7 +178,7 @@
         }
         .input{
             border-width: 0.1px;
-            width: 70%;
+            width: 65%;
             padding: 1%;
             color: gray;
             border-radius: 3px;
@@ -196,6 +193,7 @@
             }
         }
         .div2{
+            display: inline;
             width: 85%;
             margin-right: 5%;
             margin: auto;
@@ -208,13 +206,11 @@
     padding: 0.4%;
     background-color: rgb(251, 252, 252);
     .div1{
-        // margin: auto;
         width: 15%;
         display: flex;
         .divImage{
             margin-top: 4%;
-            margin-left: 50%;
-            margin: auto;
+            margin-left: 0.1vw;
         }
     }
     .div2{

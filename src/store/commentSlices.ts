@@ -1,6 +1,6 @@
 import {createSlice,PayloadAction} from '@reduxjs/toolkit'
 
-import {  IDiscussion } from '../models/model';
+import {  IComment, IDiscussion,AddLike } from '../models/model';
 
 const initialState:IDiscussion[]=[{
     id: 3,
@@ -61,16 +61,47 @@ const initialState:IDiscussion[]=[{
     replies: []
 }];
 
+const setlike:AddLike=(id,obj)=>{
+    if(obj.id===id){
+        if(!obj.iLikedIt){
+            obj.likes++;
+            obj.iLikedIt=!obj.iLikedIt
+            return obj;
+        }
+        else{
+            obj.likes--;
+            obj.iLikedIt=!obj.iLikedIt
+            return obj;
+        }
+    }
+    else{
+        return obj;
+    }
+}
+
+
 const commentSlices=createSlice({
     name:'comment',
     initialState,
     reducers:{
         addComment:(state,action:PayloadAction<IDiscussion>)=>{
             state.push(action.payload)
+        },
+        addReply:(state,action:PayloadAction<{id:number,comment:IComment}>)=>{
+            state.map(item=>item.id===action.payload.id
+                            ?   item.replies.push(action.payload.comment)
+                            :   item
+                            )
+        },
+        likeReply:(state,action:PayloadAction<number>)=>{
+            state.map(items=>items.replies.map(item=>setlike(action.payload,item)))
+        },
+        like:(state,action:PayloadAction<number>)=>{
+            state.map(item=>setlike(action.payload,item))
         }
     }
 })
 
-export const {addComment}=commentSlices.actions;
+export const {addComment,like,likeReply,addReply}=commentSlices.actions;
 
 export default commentSlices.reducer;

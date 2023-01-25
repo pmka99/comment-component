@@ -1,63 +1,76 @@
-import React ,{useState,useEffect} from "react";
+import React ,{useState} from "react";
 import { useDispatch } from "react-redux";
-import { IComment } from "../models/model";
+import { IComment,ReplaceAvatarName,CalculateDiffTime } from "../models/model";
 import { AppDispatch } from "../store";
 import likeImage from '../images/like.jpg'
+import { likeReply } from "../store/commentSlices";
 
 interface props{
     comment:IComment
     nowTime:number
 }
 
+// This Component get every IComment that was repleying to a based IComment , and show its information
 const Replies:React.FC<props>=({comment,nowTime})=>{
+    const[iLikedIt,setIlikedit]=useState<boolean>(comment.iLikedIt);
+    const dispatch=useDispatch<AppDispatch>();
 
-    const[time,setTime]=useState<string>('')
-
-    useEffect(()=>{
-        diftime()
-    },[])
-
-    const diftime=()=>{
-        var differrent:number=nowTime-comment.date
+    // This function calculates differrent between time And set time some Expressions 
+    const diftime:CalculateDiffTime=(timeNow,time)=>{
+        var differrent:number=timeNow-time
         differrent=Math.floor(differrent/1000);
 
         if(differrent<60){
-            setTime('a second ago')
+            return('a second ago')
         }
         else if(differrent<120){
-            setTime('a minute ago')
+            return('a minute ago')
         }
         else if(differrent<3600){
             let diff=Math.floor(differrent/60);
-            setTime(`${diff} minutes ago`)
+            return(`${diff} minutes ago`)
         }
         else if(differrent<86400){
             let diff=Math.floor(differrent/3600);
-            setTime(`${diff} hours ago`)
+            return(`${diff} hours ago`)
         }
         else if(differrent<2592000){
             let diff=Math.floor(differrent/86400);
-            setTime(`${diff} days ago`)
+            return(`${diff} days ago`)
         }
         else if(differrent<31104000){
             let diff=Math.floor(differrent/2592000);
-            setTime(`${diff} months ago`)
+            return(`${diff} months ago`)
         }
         else{
             let diff=Math.floor(differrent/31104000);
-            setTime(`${diff} years ago`)
+            return(`${diff} years ago`)
         }
     }
 
-    const replaceAvatarName=(name:string)=>{
+    // This function get name of IUser and return it to avatarName if the IUser has no avatar
+    const replaceAvatarName:ReplaceAvatarName=(name)=>{
         let num=name.indexOf(" ");
         let character1=name.charAt(0)
         let character2=name.charAt(num+1)
         let avatarName=character1+character2
         return avatarName;
     }
+
+    // This function return styles
+    const returnLikeStyle=()=>{
+        if(iLikedIt){
+            return {color:'white',backgroundColor:'#468cf4'}
+        }
+        else{
+            return {color: '#468cf4',backgroundColor:'white'}  
+        }
+    }
+
+    // this function add number of likes of every based IComent
     const likeMore=()=>{
-        console.log("like")
+        setIlikedit(!iLikedIt)
+        dispatch(likeReply(comment.id))
     }
 
     return(
@@ -66,7 +79,7 @@ const Replies:React.FC<props>=({comment,nowTime})=>{
                 <div className='divImage'>
                     {
                         comment.user.avatar
-                            ? <img src={comment.user.avatar} className='avatar' />
+                            ? <img alt="user avatar" src={comment.user.avatar} className='avatar' />
                             : <div className='avatarName'><div className='textAvatar'>{replaceAvatarName(comment.user.name)}</div></div>
                     }
                 </div>
@@ -78,14 +91,14 @@ const Replies:React.FC<props>=({comment,nowTime})=>{
                     </div>
                     <div> </div>
                     <div className="time">
-                        {time}
+                        {diftime(nowTime,comment.date)}
                     </div>
                 </div>
                 <div className='text'>
                     {comment.text}
                 </div>
-                <div className="div2-2" onClick={()=>likeMore()}>
-                    <div><img className="likeImg" src={likeImage}></img></div>
+                <div style={returnLikeStyle()} className="div2-2" onClick={()=>likeMore()}>
+                    <div><img alt="like icon" className="likeImg" src={likeImage}></img></div>
                     <div className="likenumber">{comment.likes}</div>
                 </div>
             </div>
