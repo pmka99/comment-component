@@ -10,7 +10,7 @@ function App() {
   const nowTime=Date.now();
   return (
     <div className="app">
-      <div style={{color:'red',margin:'5px',fontSize:'larger'}}>
+      <div style={{color:'red',margin:'2px',fontSize:'larger'}}>
         <b>   Comments</b>
       </div>
       
